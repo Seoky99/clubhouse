@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    width: 500px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 10px solid black;
+    border-radius: 10px;
+}
