@@ -3,6 +3,7 @@ const authController = require("../controllers/authController");
 
 const authRouter = Router();
 
-authRouter.get("/", authController.signupGet); 
+authRouter.get("/signup", authController.signupGet); 
+authRouter.post("/signup", authController.signupPost);
 
 module.exports = authRouter; 

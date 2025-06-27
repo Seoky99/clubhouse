@@ -11,6 +11,7 @@ const tableCreation =
     password TEXT NOT NULL,
     fname TEXT, 
     lname TEXT, 
+    email TEXT, 
     member_status BOOLEAN DEFAULT FALSE
 );
 
