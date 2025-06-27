@@ -6,28 +6,39 @@ function signupGet(req, res) {
     res.render("signup-form");
 }
 
+function passwordConfirmation(value, {req}) {
+    return value === req.body.password; 
+}
+
+async function userExists(value) {
+    const rows = await db.findUser(value); 
+    
+    if (rows.length > 0) {
+        throw new Error('There is already an user with this username.');
+    }
+}
+
 const validateUser = [
-    body('fname').notEmpty().withMessage('Please enter your first name.').isAlpha().withMessage('Please enter a valid first name')
+    body('fname').notEmpty().withMessage('Please enter your first name.').bail().isAlpha().withMessage('Please enter a valid first name').bail()
         .isLength({min: 2, max: 20}).withMessage('Please enter a valid length of name'),
-    body('lname').notEmpty().withMessage('Please enter your first name.').isAlpha().withMessage('Please enter a valid last name')
+    body('lname').notEmpty().withMessage('Please enter your last name.').bail().isAlpha().withMessage('Please enter a valid last name').bail()
         .isLength({min: 2, max: 20}).withMessage('Please enter a valid length of name'),
-    body('username').notEmpty().withMessage('Please enter your username'), //TODO: implement checking if a username already exists 
-    body('email').notEmpty().withMessage('Please enter your email.').isEmail().withMessage('Please enter a valid email address')
+    body('username').notEmpty().withMessage('Please enter your username').bail()
+        .custom(userExists),
+    body('email').notEmpty().withMessage('Please enter your email.').bail().isEmail().withMessage('Please enter a valid email address').bail()
         .isLength({min: 6, max: 30}).withMessage('Please enter a valid email address.'),
     body('password').notEmpty().withMessage('Please enter your password'),
-    body('confirm-password').notEmpty().withMessage('Please confirm your password.')
+    body('confirm-password').notEmpty().withMessage('Please confirm your password.').custom(passwordConfirmation).withMessage('The passwords did not match!')
 ]; 
 
 async function addUser(req, res, next) {
 
     const { username, password, fname, lname, email} = req.body;
 
-    //use validation result 
+    const result = validationResult(req); 
 
-    const errors = validationResult(req.body); 
-
-    if (!errors.isEmpty()) {
-        res.status(400).send("duMBASS");
+    if (!(result.isEmpty())) {
+        return res.status(400).render("signup-form", { errors: result.array() });
     }
 
     try { 

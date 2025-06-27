@@ -11,5 +11,15 @@ async function addUser(username, password, fname, lname, email, member_status) {
     }
 }
 
+async function findUser(username) {
+    const query = `SELECT * FROM users WHERE username = $1`;
+    try {
+        const { rows } = await pool.query(query, [username]);
+        return rows; 
+    } catch(err) {
+        console.log(err); 
+    }
+}
 
-module.exports = { addUser };
+
+module.exports = { addUser, findUser };

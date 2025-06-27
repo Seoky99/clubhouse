@@ -7,24 +7,38 @@
     <link rel="stylesheet" href="/styles/form-styles.css">
 </head>
 <body>
+    <% if (locals.errors) { %>
+        <ul>
+            <% errors.forEach(error => { %>
+                <li> <%= error.msg %> </li>
+            <% }) %> 
+        </ul>
+    <% } %> 
+
     <form action="/auth/signup" method="post">
-        <label for="fname">First Name</label>
-        <input name="fname" type="text"></input>
+        <div>
+            <label for="fname">First Name</label>
+            <input name="fname" type="text"></input>
 
-        <label for="lname">Last Name</label>
-        <input name="lname" type="text"></input>
+            <label for="lname">Last Name</label>
+            <input name="lname" type="text"></input>
+        </div>
 
-        <label for="username">Username</label>
-        <input name="username" type="text"></input>
+        <div>
+            <label for="username">Username</label>
+            <input name="username" type="text"></input>
 
-        <label for="email">Email</label>
-        <input name="email" type="email"></input>
+            <label for="email">Email</label>
+            <input name="email" type="email"></input>
+        </div>
 
-        <label for="password">Password</label>
-        <input name="password" type="password"></input>
+        <div>
+            <label for="password">Password</label>
+            <input name="password" type="password"></input>
 
-        <label for="confirm-password">Confirm Password:</label>
-        <input name="confirm-password" type="password"></input>
+            <label for="confirm-password">Confirm Password:</label>
+            <input name="confirm-password" type="password"></input>
+        </div>
 
         <button type="submit">Sign Up!</button>
     </form>
