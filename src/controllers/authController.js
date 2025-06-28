@@ -1,6 +1,7 @@
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const db = require('../models/queries');
+const passport = require('passport');
 
 function signupGet(req, res) {
     res.render("signup-form");
@@ -53,4 +54,23 @@ async function addUser(req, res, next) {
 
 const signupPost = [ validateUser, addUser ]; 
 
-module.exports = { signupGet, signupPost };
+function loginGet(req, res) {
+
+    let error = '';
+
+    if (req.session.messages) {
+        error = req.session.messages[req.session.messages.length -1];
+        req.session.messages = []; 
+    }
+
+    res.render('login-form', {error: error});
+}
+
+const loginPost = passport.authenticate("local", {
+        successRedirect: '/clubhouse',
+        failureRedirect: "/auth/login",
+        failureMessage: true,
+        }
+    );
+
+module.exports = { signupGet, signupPost, loginGet, loginPost};

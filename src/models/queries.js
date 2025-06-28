@@ -21,5 +21,16 @@ async function findUser(username) {
     }
 }
 
+async function findUserById(id) {
+    const query = `SELECT * FROM users WHERE id = $1`;
+    try {
+        const { rows } = await pool.query(query, [id]);
+        return rows; 
+    } catch(err) {
+        console.log(err); 
+    }
+}
 
-module.exports = { addUser, findUser };
+
+
+module.exports = { addUser, findUser, findUserById };
