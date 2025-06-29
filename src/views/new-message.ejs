@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/clubhouse/write" method="post">
+        <p>Write a new message!</p>
+
+        <label for="title">Title of message:</label>
+        <input name="title" type="text" required minLength="1" maxLength="50"></input>
+
+        <label for="text">Message:</label>
+        <input name="text" type="text" maxLength="300"></input>
+
+        <button type="submit">Submit!</button>
+    </form>
+</body>
+</html>

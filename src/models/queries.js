@@ -31,6 +31,28 @@ async function findUserById(id) {
     }
 }
 
+async function addMessage(userid, title, text, date) {
+    const query = `INSERT INTO messages(user_id, title, text, time) 
+                   VALUES ($1, $2, $3, to_timestamp($4))`;
+
+    try {
+        await pool.query(query, [userid, title, text, date/1000.0]);
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+async function getMessages() {
+    const query = `SELECT username, title, text, time FROM messages 
+                   INNER JOIN users ON user_id = id`;
+    
+    try { 
+        const {rows} = await pool.query(query); 
+        return rows; 
+    }   catch(err) { 
+        console.log(err);
+    }
+}
 
 
-module.exports = { addUser, findUser, findUserById };
+module.exports = { addUser, findUser, findUserById, addMessage, getMessages };

@@ -7,6 +7,7 @@ const session = require('./src/config/session')
 const configPassport = require('./src/config/passportConfig'); 
 
 const authRouter = require('./src/routes/authRouter');
+const clubRouter = require('./src/routes/clubRouter');
 
 const app = express(); 
 
@@ -23,13 +24,16 @@ app.use(passport.session());
 configPassport(passport);
 
 app.use("/auth", authRouter);
+app.use("/clubhouse", clubRouter);
+
 //later: check if authenticated, authorized 
 app.get("/", (req, res) => {
     if (req.isAuthenticated()) {
-        res.send("hello");
+        res.redirect("/clubhouse");
     } else {
+        console.log("?");
     res.render("landing-page")
-    }});
+    }}); 
 
 app.listen(8080, () => {
     console.log("running!");

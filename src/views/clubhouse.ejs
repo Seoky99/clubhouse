@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clubhouse</title>
+    <link rel="stylesheet" href="/styles/clubhouse-styles.css">
+</head>
+<body>
+    <div class="content-wrapper">
+        <nav>
+            <a href="/clubhouse">General</a>
+            <a href="/clubhouse/secret-club">Secret Club</a>
+        </nav>
+        <a href="/clubhouse/write" id="write">Write a message!</a>
+        <div class="message-box">
+
+            <% if (locals.messages) { %>
+                <ul>
+                <% messages.forEach(message => { %>
+                    <li class="message">
+                        <p><%= message.username %></p>
+                        <p><%= message.title %></p>
+                        <p><%= message.text %></p>
+                        <p><%= message.time %></p>
+                    </li>
+                <% })%>
+                </ul>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
