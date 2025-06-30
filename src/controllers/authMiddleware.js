@@ -6,5 +6,16 @@ function isAuth(req, res, next) {
     }
 }
 
+function isMember(req, res, next) {
 
-module.exports = { isAuth };
+    console.log("?");
+    if (req.isAuthenticated() && req.user.member_status) {
+        next();
+    } else {
+        res.status(401).send("You are not authorized to view this resource.");
+    }
+}
+
+
+
+module.exports = { isAuth, isMember };

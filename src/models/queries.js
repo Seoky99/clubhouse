@@ -1,8 +1,8 @@
 const pool = require('./pool');
 
 async function addUser(username, password, fname, lname, email, member_status) {
-    const query = `INSERT INTO users (username, password, fname, lname, email, member_status) 
-        VALUES ($1, $2, $3, $4, $5, $6)`;
+    const query = `INSERT INTO users (username, password, fname, lname, email, member_status, admin_status) 
+        VALUES ($1, $2, $3, $4, $5, $6, false)`;
     
     try {
         await pool.query(query, [username, password, fname, lname, email, member_status]);
@@ -54,7 +54,7 @@ async function addSecretMessage(userid, title, text, date) {
 }
 
 async function getMessages() {
-    const query = `SELECT username, title, text, time FROM messages 
+    const query = `SELECT username, title, text, time, member_status, admin_status, message_id FROM messages 
                    INNER JOIN users ON user_id = id`;
     
     try { 
@@ -66,7 +66,7 @@ async function getMessages() {
 }
 
 async function getSecretMessages() {
-    const query = `SELECT username, title, text, time FROM secret_messages 
+    const query = `SELECT username, title, text, time, admin_status, message_id FROM secret_messages 
                    INNER JOIN users ON user_id = id`;
     
     try { 
@@ -87,5 +87,25 @@ async function makeMember(userid) {
     }
 }
 
+async function deleteMessage(message_id) {
+    const query = `DELETE FROM messages WHERE message_id = $1`;
+    
+    try { 
+        await pool.query(query, [message_id]); 
+    }   catch(err) { 
+        console.log(err);
+    }
+}
 
-module.exports = { addUser, findUser, findUserById, addMessage, addSecretMessage, getMessages, getSecretMessages, makeMember };
+async function deleteSecretMessage(message_id) {
+    const query = `DELETE FROM secret_messages WHERE message_id = $1`;
+    
+    try { 
+        await pool.query(query, [message_id]); 
+    }   catch(err) { 
+        console.log(err);
+    }
+}
+
+module.exports = { addUser, findUser, findUserById, addMessage, addSecretMessage, deleteMessage, deleteSecretMessage,
+    getMessages, getSecretMessages, makeMember };

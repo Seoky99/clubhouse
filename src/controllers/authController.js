@@ -84,4 +84,14 @@ function logout(req, res, next) {
     }); 
 }
 
-module.exports = { signupGet, signupPost, loginGet, loginPost, logout};
+async function deleteMessage(req, res) {
+    await db.deleteMessage(req.body.message_id); 
+    res.redirect("/clubhouse");
+}
+
+async function deleteSecretMessage(req, res) {
+    await db.deleteSecretMessage(req.body.message_id); 
+    res.redirect("/clubhouse/secret-club");
+}
+
+module.exports = { signupGet, signupPost, loginGet, loginPost, logout, deleteMessage, deleteSecretMessage};

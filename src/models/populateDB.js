@@ -12,7 +12,8 @@ const tableCreation =
     fname TEXT, 
     lname TEXT, 
     email TEXT, 
-    member_status BOOLEAN DEFAULT FALSE
+    member_status BOOLEAN DEFAULT FALSE, 
+    admin_status BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS messages (

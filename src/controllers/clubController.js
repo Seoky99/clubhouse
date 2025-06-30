@@ -3,6 +3,7 @@ const db = require('../models/queries');
 
 async function clubGet (req, res) {
     const messages = await db.getMessages();
+
     res.render("clubhouse", {messages});
 }
 

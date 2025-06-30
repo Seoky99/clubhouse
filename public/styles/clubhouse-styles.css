@@ -34,7 +34,6 @@ nav {
 }
 
 .message-box {
-    background-color: red;
 }
 
 ul {
@@ -64,3 +63,12 @@ ul {
     position: absolute;
     left: 85%;
 }
+
+.member-tag {
+    background-color: purple;
+}
+
+.admin-tag {
+    background-color: red;
+}
+

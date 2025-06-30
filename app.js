@@ -36,8 +36,7 @@ app.get("/", (req, res) => {
     if (req.isAuthenticated()) {
         res.redirect("/clubhouse");
     } else {
-        console.log("?");
-    res.render("landing-page")
+        res.render("landing-page")
     }}); 
 
 app.listen(8080, () => {
