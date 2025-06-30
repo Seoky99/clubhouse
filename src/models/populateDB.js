@@ -22,6 +22,15 @@ CREATE TABLE IF NOT EXISTS messages (
     text TEXT, 
     time DATE,
     FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS secret_messages (
+    message_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id INTEGER,
+    title TEXT,
+    text TEXT, 
+    time DATE,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );`;
 
 async function populateDB() {

@@ -23,6 +23,11 @@ app.use(passport.session());
 
 configPassport(passport);
 
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.use("/auth", authRouter);
 app.use("/clubhouse", clubRouter);
 

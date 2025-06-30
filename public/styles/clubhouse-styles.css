@@ -6,6 +6,7 @@
 
 body {
     background-color: orange; 
+    overflow-y: scroll;
 }
 
 nav {
@@ -57,4 +58,9 @@ ul {
     padding: 10px;
     border: 2px solid black;
     border-radius: 5px;
+}
+
+#logout {
+    position: absolute;
+    left: 85%;
 }
