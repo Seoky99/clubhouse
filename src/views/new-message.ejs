@@ -7,8 +7,6 @@
 </head>
 <body>
     
-    <% if (isSecret) { console.log("poo"); }%>
-
     <form action="<%= isSecret ? '/clubhouse/secret-club/write' : '/clubhouse/write' %>" method="post">
         <p>Write a new <%= isSecret ? '(secret)' : ' '  %>  message!</p>
 

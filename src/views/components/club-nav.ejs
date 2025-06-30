@@ -2,5 +2,8 @@
     <a href="/clubhouse">General</a>
     <a href="/clubhouse/secret-club">Secret Club</a>
 
-    <a id="logout" href="/auth/logout">Log Out</a>
+    <div id="profile">
+        <p>Signed in as: <%= locals.currentUser.username %></p>
+        <a id="logout" href="/auth/logout">Log Out</a>
+    </div>
 </nav>

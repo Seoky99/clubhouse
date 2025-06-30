@@ -7,8 +7,6 @@ function isAuth(req, res, next) {
 }
 
 function isMember(req, res, next) {
-
-    console.log("?");
     if (req.isAuthenticated() && req.user.member_status) {
         next();
     } else {

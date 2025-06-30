@@ -22,10 +22,10 @@
                         <% if (message.admin_status) {%>
                         <p class="admin-tag">Admin</p>
                         <% } %> 
-                        <p><%= message.username %></p>
-                        <p><%= message.title %></p>
-                        <p><%= message.text %></p>
-                        <p><%= message.time %></p>
+                        <p class="m-username"><%= message.username %></p>
+                        <p class="m-title"><%= message.title %></p>
+                        <p class="m-text"><%= message.text %></p>
+                        <p class="m-date"><%= message.time %></p>
                         <% if (locals.currentUser.admin_status) {%>
                         <form action="/auth/messages/delete" method="post">
                             <input type="hidden" name="message_id" value="<%= message.message_id %>"> </input>
